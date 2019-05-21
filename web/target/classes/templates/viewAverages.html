@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+    p {
+    font-family: calibri;
+    font-size: 115%;
+    border: 4px solid powderblue;
+    margin: 10px;
+    }
+
+    myText {
+    font-family: calibri;
+    font-size: 100%;
+    }
+
+    h1 {
+    font-family: calibri;
+    font-size: 200%;
+}
+
+</style>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Średnie</title>
 </head>
 <body>
-
+    <h1 th:text="${bYear}"/>
 </body>
 </html>
