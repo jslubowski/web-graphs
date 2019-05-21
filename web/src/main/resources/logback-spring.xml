@@ -1,0 +1,7 @@
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <logger name="slubowski.jakub" level="TRACE"/>
+    <logger name="org.springframework" level="TRACE"/>
+
+</configuration>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wykresy - projekt zespołowy</title>
+</head>
+<style>
+    p {
+    font-family: calibri;
+    font-size: 115%;
+    border: 4px solid powderblue;
+    margin: 10px;
+    }
+
+    myText {
+    font-family: calibri;
+    font-size: 100%;
+    }
+
+    h1 {
+    font-family: calibri;
+    font-size: 200%;
+}
+
+</style>
+<body>
+
+<div align="center">
+    <h1 th:text="Witamy"/>
+    <p th:text="${currentTemperature}"/>
+    <p th:text="${currentHumidity}"/>
+    <p th:text="${currentCo2}"/>
+    <p th:text="${currentPressure}"/>
+    <script th:inline="javascript">
+/*<![CDATA[*/
+function compareDataPointX(dataPoint1, dataPoint2) {
+		return dataPoint1.x - dataPoint2.x;
+}
+
+window.onload = function() {
+    var pontos = /*[${data}]*/ 'default';
+
+///////////////////////// == Temperature ==  ///////////////////////////////
+
+    var chartTemp = new CanvasJS.Chart("chartContainer", {
+        zoomEnabled: true,
+    	animationEnabled: false,
+    	theme: "light1",
+    	title:{
+    		text: "Temperatura",
+    		fontFamily: "calibri",
+    	},
+    	axisY:{
+    		includeZero: false
+    	},
+    	data: [{
+    	    lineColor:"red",
+    		type: "spline",
+    		dataPoints: []
+    	}]
+    });
+
+    /*[# th:block th:each="temp : ${data}" ]*/
+     chartTemp.options.data[0].dataPoints.push({x: new Date(/*[[${temp.getYear()}]]*/,/*[[${temp.getMonth()}]]*/,/*[[${temp.getDay()}]]*/,
+     /*[[${temp.getHour()}]]*/,/*[[${temp.getMinute()}]]*/,/*[[${temp.getSecond()}]]*/), y:/*[[${temp.getTemperature()}]]*/});
+    /*[/]*/
+    chartTemp.options.data[0].dataPoints.sort(compareDataPointX);
+    chartTemp.render();
+
+///////////////////////// == Humidity ==  ///////////////////////////////
+     var chartHumid = new CanvasJS.Chart("chartContainer2", {
+        zoomEnabled: true,
+    	animationEnabled: false,
+    	theme: "light1",
+    	title:{
+    		text: "Wilgotność",
+    		fontFamily: "calibri",
+    	},
+    	axisY:{
+    	valueFormatString:"#'%'",
+    		includeZero: false
+    	},
+    	data: [{
+    		type: "spline",
+    		dataPoints: []
+    	}]
+    });
+     /*[# th:block th:each="temp : ${data}" ]*/
+     chartHumid.options.data[0].dataPoints.push({x: new Date(/*[[${temp.getYear()}]]*/,/*[[${temp.getMonth()}]]*/,/*[[${temp.getDay()}]]*/,
+     /*[[${temp.getHour()}]]*/,/*[[${temp.getMinute()}]]*/,/*[[${temp.getSecond()}]]*/), y:/*[[${temp.getHumidity()}]]*/});
+    /*[/]*/
+    chartHumid.options.data[0].dataPoints.sort(compareDataPointX);
+    chartHumid.render();
+
+
+    ///////////////////////// == Co2 ==  ///////////////////////////////
+
+    var chartCo2 = new CanvasJS.Chart("chartContainer3", {
+        zoomEnabled: true,
+    	animationEnabled: false,
+    	theme: "light1",
+    	title:{
+    		text: "Dwutlenek węgla",
+    		fontFamily: "calibri",
+    	},
+    	axisY:{
+    	valueFormatString:"#'%'",
+    		includeZero: false
+    	},
+    	data: [{
+    		lineColor:"black",
+    		type: "spline",
+    		dataPoints: []
+    	}]
+    });
+
+    /*[# th:block th:each="temp : ${data}" ]*/
+     chartCo2.options.data[0].dataPoints.push({x: new Date(/*[[${temp.getYear()}]]*/,/*[[${temp.getMonth()}]]*/,/*[[${temp.getDay()}]]*/,
+     /*[[${temp.getHour()}]]*/,/*[[${temp.getMinute()}]]*/,/*[[${temp.getSecond()}]]*/), y:/*[[${temp.getCo2()}]]*/});
+    /*[/]*/
+    chartCo2.options.data[0].dataPoints.sort(compareDataPointX);
+    chartCo2.render();
+
+
+
+///////////////////////// == Pressure ==  ///////////////////////////////
+
+    var chartPressure = new CanvasJS.Chart("chartContainer4", {
+        zoomEnabled: true,
+    	animationEnabled: false,
+    	theme: "light1",
+    	title:{
+    		text: "Ciśnienie",
+    		fontFamily: "calibri",
+    	},
+    	axisY:{
+    	valueFormatString:"# hPa",
+    		includeZero: false
+    	},
+    	data: [{
+    		lineColor:"green",
+    		type: "spline",
+    		dataPoints: []
+    	}]
+    });
+
+    /*[# th:block th:each="temp : ${data}" ]*/
+     chartPressure.options.data[0].dataPoints.push({x: new Date(/*[[${temp.getYear()}]]*/,/*[[${temp.getMonth()}]]*/,/*[[${temp.getDay()}]]*/,
+     /*[[${temp.getHour()}]]*/,/*[[${temp.getMinute()}]]*/,/*[[${temp.getSecond()}]]*/), y:/*[[${temp.getPressure()}]]*/});
+    /*[/]*/
+    chartPressure.options.data[0].dataPoints.sort(compareDataPointX);
+    chartPressure.render();
+
+}
+/*]]>*/
+
+</script>
+
+    <div id="chartContainer" style="height: 400px; width: 70%;"></div>
+    <div id="chartContainer2" style="height: 400px; width: 70%;"></div>
+    <div id="chartContainer3" style="height: 400px; width: 70%;"></div>
+    <div id="chartContainer4" style="height: 400px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+</div>
+
+</body>
+</html>
