@@ -49,7 +49,7 @@ public class WebController {
         s = "Obecne ciśnienie: " + data.get((data.size()-1)).getPressure().toString() + " hPa";
         model.addAttribute("currentPressure", s);
 
-
+        model.addAttribute("data",data);
         return GraphsViews.HOME;
     }
 

@@ -163,23 +163,27 @@ window.onload = function() {
     <div id="chartContainer3" style="height: 400px; width: 70%;"></div>
     <div id="chartContainer4" style="height: 400px; width: 70%;"></div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 </div>
 <div align="center">
-    <form action="#" th:action="@{viewAverages}" method="post">
-        <myText>
-            <div style="height: 50px; width: 70%">
-            <p>Obliczanie średnich wartości</p>
-            </div>
-            Wybierz datę początkową:<br><br>
+    <div style="height: 50px; width: 70%">
+    <p>Wyliczanie średniej</p>
+    </div>
+    <form action="graphs"
+          method="post"}>
+        <myText>Wybierz datę początkową: <br> <br> <br>
+
             <label for="bYear">Rok:</label>
             <input id="bYear" type="text" name="bYear"/>
             <label for="bMonth">Miesiąc:</label>
             <input id="bMonth" type="text" name="bMonth"/>
             <label for="bDay">Dzień:</label>
             <input id="bDay" type="text" name="bDay"/>
-            <br>
-            <br>
-        Wybierz datę końcową:<br>
+            <br> <br>
+
+
+       Wybierz datę końcową: <br> <br>
+
             <label for="eYear">Rok:</label>
             <input id="eYear" type="text" name="eYear"/>
             <label for="eMonth">Miesiąc:</label>
@@ -189,6 +193,7 @@ window.onload = function() {
         </myText>
         <h1></h1>
         <input type="submit" value="OK"/>
+
     </form>
 
 </div>
