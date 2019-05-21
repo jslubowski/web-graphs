@@ -14,7 +14,9 @@ import slubowski.jakub.repository.DataRepository;
 import slubowski.jakub.service.SensorDataService;
 import slubowski.jakub.util.GraphsViews;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,11 +24,11 @@ import java.util.List;
 @Controller
 public class WebController {
 
-    @Autowired
-    private DataRepository dataRepository;
 
     @Autowired
     private SensorDataService sensorDataService;
+
+    private List<SensorData> data;
 
     // private final SensorDataList data = new SensorDataList(dataRepository);
     // TO-DO sprobowac zaimplementowac liste w dataRespoitory
@@ -41,7 +43,7 @@ public class WebController {
 
     @GetMapping
     public String graqphsTemp(Model model){
-        List<SensorData> data = new ArrayList<>(sensorDataService.getAll());
+        data = new ArrayList<>(sensorDataService.getAll());
         String s = "Obecna temperatura: " + data.get((data.size()-1)).getTemperature().toString() + " stopni Celsjusza";
         model.addAttribute("currentTemperature", s);
         s = "Obecna wilgotność: " + data.get((data.size()-1)).getHumidity().toString() + "%";
@@ -57,8 +59,13 @@ public class WebController {
 
     @PostMapping
     public String showAverage(@RequestParam String bYear, @RequestParam String bMonth, @RequestParam String bDay, @RequestParam String eYear, @RequestParam String eMonth, @RequestParam String eDay, Model model){
-        model.addAttribute("bYear", bYear);
-
+        data = new ArrayList<>(sensorDataService.getFromTo(Integer.parseInt(bYear), Integer.parseInt(bMonth),Integer.parseInt(bDay),Integer.parseInt(eYear),Integer.parseInt(eMonth),Integer.parseInt(eDay)));
+        model.addAttribute("data2", data);
+        model.addAttribute("averageTemp", sensorDataService.averageTemp(data));
+        model.addAttribute("averageHumidity", sensorDataService.averageHumidity(data));
+        model.addAttribute("averageCo2", sensorDataService.averageCo2(data));
+        model.addAttribute("averagePressure", sensorDataService.averagePressure(data));
+        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd");
         return GraphsViews.AVERAGES;
     }
 

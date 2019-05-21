@@ -24,6 +24,12 @@
     <title>Średnie</title>
 </head>
 <body>
-    <h1 th:text="${bYear}"/>
+<div align="center">
+    <myText>Średnia temperatura: </myText><myText th:text="${averageTemp}"/><br>
+    <myText>Średnia wilgotność: </myText><myText th:text="${averageHumidity}"/><br>
+    <myText>Średnie stężenie tlenku węgla: </myText><myText th:text="${averageCo2}"/><br>
+    <myText>Średnie ciśnienie: </myText><myText th:text="${averageTemp}"/><br>
+    <a href="@{graqphsTemp}">Strona domowa</a>
+</div>
 </body>
 </html>
