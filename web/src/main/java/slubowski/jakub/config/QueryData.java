@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Data // no need for getters and setters
-@EqualsAndHashCode(of = "id") // self-explanatory
+@EqualsAndHashCode
 public class QueryData {
     // == fields ==
     private String year;

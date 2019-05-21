@@ -25,12 +25,14 @@
 </style>
 <body>
 
-<div align="center">
+<div align="center"/>
+<div style="height: 250px; width: 70%">
     <h1 th:text="Witamy"/>
     <p th:text="${currentTemperature}"/>
     <p th:text="${currentHumidity}"/>
     <p th:text="${currentCo2}"/>
     <p th:text="${currentPressure}"/>
+</div>
     <script th:inline="javascript">
 /*<![CDATA[*/
 function compareDataPointX(dataPoint1, dataPoint2) {
