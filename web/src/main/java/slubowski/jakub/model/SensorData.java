@@ -67,6 +67,6 @@ public class SensorData {
         this.pressure = pressure;
     }
 
-    public SensorData(){};
+    public SensorData(){}
 
 }
