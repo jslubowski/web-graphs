@@ -30,6 +30,8 @@ public class WebController {
 
     private List<SensorData> data;
 
+    private List<SensorData> dataAverage;
+
     // private final SensorDataList data = new SensorDataList(dataRepository);
     // TO-DO sprobowac zaimplementowac liste w dataRespoitory
 
@@ -59,13 +61,14 @@ public class WebController {
 
     @PostMapping
     public String showAverage(@RequestParam String bYear, @RequestParam String bMonth, @RequestParam String bDay, @RequestParam String eYear, @RequestParam String eMonth, @RequestParam String eDay, Model model){
-        data = new ArrayList<>(sensorDataService.getFromTo(Integer.parseInt(bYear), Integer.parseInt(bMonth),Integer.parseInt(bDay),Integer.parseInt(eYear),Integer.parseInt(eMonth),Integer.parseInt(eDay)));
-        model.addAttribute("data2", data);
-        model.addAttribute("averageTemp", sensorDataService.averageTemp(data));
-        model.addAttribute("averageHumidity", sensorDataService.averageHumidity(data));
-        model.addAttribute("averageCo2", sensorDataService.averageCo2(data));
-        model.addAttribute("averagePressure", sensorDataService.averagePressure(data));
-        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd");
+        dataAverage = new ArrayList<>(sensorDataService.getFromTo(Integer.parseInt(bYear), Integer.parseInt(bMonth),Integer.parseInt(bDay),Integer.parseInt(eYear),Integer.parseInt(eMonth),Integer.parseInt(eDay)));
+        model.addAttribute("data2", dataAverage);
+        StringBuffer s = new StringBuffer("The dataAverage size is: " + dataAverage.size());
+        log.info(s.toString());
+        model.addAttribute("averageTemp", sensorDataService.averageTemp(dataAverage));
+        model.addAttribute("averageHumidity", sensorDataService.averageHumidity(dataAverage));
+        model.addAttribute("averageCo2", sensorDataService.averageCo2(dataAverage));
+        model.addAttribute("averagePressure", sensorDataService.averagePressure(dataAverage));
         return GraphsViews.AVERAGES;
     }
 

@@ -19,6 +19,8 @@ public class SensorDataService {
 
     private List<SensorData> data;
 
+    private List<SensorData> dataAverage;
+
 
     // == init ==
     @PostConstruct
@@ -37,17 +39,24 @@ public class SensorDataService {
 
 
     public List<SensorData> getFromTo(int bYear, int bMonth, int bDay, int eYear, int eMonth, int eDay){
-        data = new ArrayList<>();
+        dataAverage = new ArrayList<>();
         for(SensorData s: dataRepository.findAll()){
-            if((s.getYear() >= bYear) && (s.getMonth() >= bMonth) && (s.getDay() >= bDay)){
-                log.info("First if completed");
-                if((s.getYear() <= eYear) && (s.getMonth() <= eMonth) && (s.getDay() <= eDay)){
-                    data.add(s);
-                    log.info("The data is: " + s.toString());
+            if(s.getYear() == bYear ){
+                if(s.getMonth() == bMonth ){
+                    if(s.getDay() >= bDay ) dataAverage.add(s);
+                }
+                if(bMonth > s.getMonth()) dataAverage.add(s);
+            }
+            if(s.getYear() > bYear ){
+                if(s.getYear() == eYear){
+                    if(s.getMonth() == eMonth ){
+                        if(s.getDay() <= eDay ) dataAverage.add(s);
+                    }
+                    if(bMonth < s.getMonth()) dataAverage.add(s);
                 }
             }
         }
-        return data;
+        return dataAverage;
     }
 
     public Integer averageTemp(List<SensorData> data){
@@ -55,8 +64,6 @@ public class SensorDataService {
         for(SensorData s: data){
             temperature += s.getTemperature();
         }
-        log.info(temperature.toString());
-        System.out.println(data.size());
         return (temperature/data.size());
     }
 
@@ -65,8 +72,6 @@ public class SensorDataService {
         for(SensorData s: data){
             humidity += s.getHumidity();
         }
-        log.info(humidity.toString());
-        System.out.println(data.size());
         return (humidity/data.size());
     }
 
@@ -75,8 +80,6 @@ public class SensorDataService {
         for(SensorData s: data){
             co2 += s.getCo2();
         }
-        log.info(co2.toString());
-        System.out.println(data.size());
         return (co2/data.size());
     }
 
@@ -85,8 +88,6 @@ public class SensorDataService {
         for(SensorData s: data){
             pressure += s.getPressure();
         }
-        log.info(pressure.toString());
-        System.out.println(data.size());
         return (pressure/data.size());
     }
 
