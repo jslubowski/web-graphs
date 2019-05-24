@@ -4,5 +4,4 @@ slubowski\jakub\WebMain.class
 slubowski\jakub\controller\WebController.class
 slubowski\jakub\service\SensorDataService.class
 slubowski\jakub\util\GraphsMappings.class
-slubowski\jakub\config\QueryData.class
 slubowski\jakub\util\GraphsViews.class

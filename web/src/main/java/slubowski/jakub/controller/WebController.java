@@ -32,15 +32,11 @@ public class WebController {
 
     private List<SensorData> dataAverage;
 
-    // private final SensorDataList data = new SensorDataList(dataRepository);
-    // TO-DO sprobowac zaimplementowac liste w dataRespoitory
 
     @GetMapping("/all")
     public @ResponseBody Iterable<SensorData> getAll(){
         return sensorDataService.getAll();
     }
-
-
 
 
     @GetMapping
