@@ -1,4 +1,4 @@
-This is web application for a project at Warsaw University of Technology.
+This is web application for a project at Warsaw University of Technology, Faculty of Electrical Engineering.
 
 The point of it is to create an IoT chain, and this is the last step of it, displaying the data from microcontroller. I tried to create the whole code in English but the views (.html files) are written in Polish. You can see that data is taken from the local database, where the table "sensors_data" is. 
 
