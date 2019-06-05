@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Component
 @Data
 @Entity
-@Table(name = "SensorData")
+@Table(name = "SENSOR_DATA")
 public class SensorData {
 
     // == fields from SQL ==

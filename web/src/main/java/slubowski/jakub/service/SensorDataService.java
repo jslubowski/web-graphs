@@ -26,13 +26,14 @@ public class SensorDataService {
     @PostConstruct
     public void init() {
         data = new ArrayList<>();
-        for (SensorData s : dataRepository.findAll()) {
+        for (SensorData s : dataRepository.getFromTable()) {
             data.add(s);
         }
     }
 
     // == methods ==
     public List<SensorData> getAll(){
+        init();
         return data;
     }
 
@@ -40,7 +41,7 @@ public class SensorDataService {
 
     public List<SensorData> getFromTo(int bYear, int bMonth, int bDay, int eYear, int eMonth, int eDay){
         dataAverage = new ArrayList<>();
-        for(SensorData s: dataRepository.findAll()){
+        for(SensorData s: dataRepository.getFromTable()){
             if(s.getYear() == bYear ){
                 if(s.getMonth() == bMonth ){
                     if(s.getDay() >= bDay ) dataAverage.add(s);

@@ -9,5 +9,8 @@ import java.util.Collection;
 
 public interface DataRepository extends CrudRepository<SensorData, Integer> {
 
+    @Query(value="SELECT * FROM SENSOR_DATA s",
+            nativeQuery = true)
+    public Iterable<SensorData> getFromTable();
 
 }

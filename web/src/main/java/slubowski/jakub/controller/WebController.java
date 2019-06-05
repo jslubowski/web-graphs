@@ -5,10 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import slubowski.jakub.model.SensorData;
 import slubowski.jakub.repository.DataRepository;
 import slubowski.jakub.service.SensorDataService;
@@ -38,7 +35,6 @@ public class WebController {
         return sensorDataService.getAll();
     }
 
-
     @GetMapping
     public String graqphsTemp(Model model){
         data = new ArrayList<>(sensorDataService.getAll());
@@ -52,6 +48,7 @@ public class WebController {
         model.addAttribute("currentPressure", s);
 
         model.addAttribute("data",data);
+
         return GraphsViews.HOME;
     }
 
